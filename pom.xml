@@ -10,6 +10,7 @@
 
 
         <module>bbnmd-restapi</module>
+        <module>bbnmd-client-zuul</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>
