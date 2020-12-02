@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bbnmb-base-microservice.iml" filepath="$PROJECT_DIR$/bbnmb-base-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-for-high-config/eureka-for-high-config.iml" filepath="$PROJECT_DIR$/eureka-for-high-config/eureka-for-high-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/security/security.iml" filepath="$PROJECT_DIR$/security/security.iml" />
+    </modules>
+  </component>
+</project>
