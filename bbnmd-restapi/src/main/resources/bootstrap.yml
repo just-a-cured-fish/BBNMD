@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: microservice-provider-bbnmd   #应用服务名
+#  cloud:
+#    config:
+#      name: piclib-restapi-config      # 定义要读取的资源文件的名称即:    microservice-config-client.yml
+#      profile: beta                        # 定义profile的 名称
+#      label: main                         # 定义配置文件所在的分支
+#      #uri: http://localhost:7101          # SpringCloudConfig的服务地址     注意:  这里不再是访问一台配置中心服务器，而是要通过服务发现到  eureka中通过服务名查找config服务集群
+#      username: admin                     # 连接的用户名
+#      password: a                         # 连接的密码
+#
+#      discovery:
+#        enabled: true   # 通过配置中心加载配置文件
+#        service-id: BASE-MICROSERVICE-CONFIG   # 在eureka之中注册的服务ID
+
+#服务注册中心
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://admin:a@eureka1:7301/eureka
+#  instance:
+#    preferIpAddress: true
+#    instance-id: microservice-provider-bbnmd_1   #实例名
+#    lease-expiration-duration-in-seconds: 90  #如果现在超过了5s的时间间隔( default: 90 s )
+#    lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )

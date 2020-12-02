@@ -11,6 +11,7 @@
 
         <module>bbnmd-restapi</module>
         <module>bbnmd-client-zuul</module>
+        <module>bbnmd-web</module>
     </modules>
     <name>mis-parent</name>
     <description>parent pom</description>

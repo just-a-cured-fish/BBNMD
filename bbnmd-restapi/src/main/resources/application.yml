@@ -1,0 +1,84 @@
+server:
+  port: 8888
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true    #将_转为驼峰命名
+mapper:
+  identity: MYSQL   # 标识列用mysql  配置主键自动增长
+logging:
+  level:
+    com.yc.piclib: debug
+
+#分页插件
+pagehelper:
+  helperDialect: mysql # 分页插件会自动检测当前的数据库链接，自动选择合适的分页方式。 你可以配置helperDialect属性来指定分页插件使用哪种方言。
+  reasonable: true # 分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。默认false 时，直接根据参数进行查询。
+  supportMethodsArguments: true # 支持通过 Mapper 接口参数来传递分页参数，默认值false，分页插件会从查询方法的参数值中，自动根据上面 params 配置的字段中取值，查找到合适的值时就会自动分页。 使用方法可以参考测试代码中的 com.github.pagehelper.test.basic 包下的 ArgumentsMapTest 和 ArgumentsObjTest。
+
+
+
+# 数据源
+spring:
+  security:
+    user:
+      name: admin
+      password: a
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 60.205.1.158
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bbnmd?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
+    username: root
+    password: a
+    # 初始化大小，最小，最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters，去掉后监控界面sql将无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat=true
+    #redis缓存配置，暂时还没有用到,不要导入redis的starter
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    #    password: 12345678
+#    pool:
+#      max-idle: 8
+#      min-idle: 0
+#      max-active: 8
+#      max-wait: -1
+
+#监控配置
+info:
+  app.name: MICROSERVICE-PROVIDER-PICLIB
+  company.name: yc
+  build.artifactId: $project.artifactId$
+  build.modelVersion: $project.modelVersion$
+  version: $project.version$
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
