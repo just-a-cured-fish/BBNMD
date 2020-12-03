@@ -1,0 +1,11 @@
+server:
+  port: 9001
+
+endpoints:     #启用/ restart端点重新启动应用程序上下文
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+spring:
+  application:
+    name: base-microservice-dashboard

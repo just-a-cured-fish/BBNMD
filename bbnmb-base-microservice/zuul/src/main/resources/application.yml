@@ -1,0 +1,40 @@
+server:
+  port: 9501     #zuul服务端口
+
+eureka:
+  client: # zuul客户端到Eureka注册, 这样 feign的客户端就能找到zuul服务了
+    service-url:
+      defaultZone: http://admin:a@eureka1:7301/eureka
+    register-with-eureka: true      #zuul也要注册到eureka,给feign client要访问
+  instance:
+    instance-id: base-microservice-zuul-gateway1   #实例名
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10    #设置心跳间隔时间
+    lease-expiration-duration-in-seconds: 50  # 租约超时时间间隔
+
+spring:
+  application:
+    name:  base-microservice-zuul-gateway    # zuul网关服务在eureka中的服务名
+  security:   # zuul网关服务的用户认证
+    user:
+      name: admin
+      password: a
+
+
+zuul:
+  routes:
+    piclib:     #第一个路由服务
+      path: /piclib-proxy/**                   # 访问的路径
+      serviceId: MICROSERVICE-PROVIDER-PICLIB
+      sensitiveHeaders:            # zuul是基于过滤器机制，它会自动过滤掉敏感头, 这里设置要过滤的敏感头集合为空
+  ignored-services:      # "*"代表隐藏所有的服务名，这样就不能通过zuul直接用服务名访问真实的服务了.
+    "*"
+  prefix: /yc-api    #公共前缀       /yc-api/piclib-proxy/piclib/1
+  #sensitiveHeaders:    #去掉敏感头设置,   以实现将  权限 信息向过滤器链传递 的目标
+
+logging:
+  level:
+    com.yc: debug
+    org.springframework.boot.autoconfigure.security: debug
+
+
