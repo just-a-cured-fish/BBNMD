@@ -19,6 +19,7 @@ public class Topic {
     private Integer hot;
 
     public Topic() {
+        this.hot=0;
     }
 
     public Topic(String content, Integer uid, String time, Integer hot) {

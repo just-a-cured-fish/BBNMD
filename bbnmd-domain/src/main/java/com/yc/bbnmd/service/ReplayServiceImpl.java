@@ -3,7 +3,6 @@ package com.yc.bbnmd.service;
 import com.yc.bbnmd.dao.impl.ReplayMapper;
 
 import com.yc.bbnmd.entity.Replay;
-import com.yc.bbnmd.entity.Topic;
 
 import com.yc.bbnmd.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
