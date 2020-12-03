@@ -14,8 +14,8 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableEurekaClient    //启动eureka客户端
 @EnableCircuitBreaker   //启用断路器
 @SpringCloudApplication
-public class BbRestApiApp {
+public class BbUserRestApiApp {
     public static void main(String[] args) {
-        SpringApplication.run(BbRestApiApp.class, args);
+        SpringApplication.run(BbUserRestApiApp.class, args);
     }
 }

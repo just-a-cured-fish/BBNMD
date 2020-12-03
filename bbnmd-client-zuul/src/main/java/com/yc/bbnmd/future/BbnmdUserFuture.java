@@ -1,7 +1,7 @@
-package com.yc.piclib.future;
+package com.yc.bbnmd.future;
 
 import com.yc.bbnmd.entity.User;
-import com.yc.piclib.service.PiclibRestService;
+import com.yc.bbnmd.service.UserRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -10,14 +10,14 @@ import java.util.concurrent.CompletableFuture;
 
 // 对外公开的业务层
 @Component
-public class PiclibFuture {
+public class BbnmdUserFuture {
     @Autowired
-    private PiclibRestService piclibRestService;
+    private UserRestService userRestService;
 
     @Async
     public CompletableFuture<String> findById(Integer id) {
         return CompletableFuture.supplyAsync(() -> {
-            return piclibRestService.findById(id);
+            return userRestService.findById(id);
         });
     }
 
@@ -25,7 +25,7 @@ public class PiclibFuture {
     @Async
     public CompletableFuture<String> create(User user) {
         return CompletableFuture.supplyAsync(() -> {
-            return piclibRestService.create(user);
+            return userRestService.create(user);
         });
     }
 
@@ -33,7 +33,7 @@ public class PiclibFuture {
     @Async
     public CompletableFuture<String> delete(Integer id) {
         return CompletableFuture.supplyAsync(() -> {
-            return piclibRestService.delete(id);
+            return userRestService.delete(id);
         });
     }
 }

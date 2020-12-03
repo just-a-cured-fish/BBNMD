@@ -1,4 +1,4 @@
-package com.yc.piclib.config;
+package com.yc.bbnmd.config;
 
 import feign.Logger;
 import feign.auth.BasicAuthRequestInterceptor;

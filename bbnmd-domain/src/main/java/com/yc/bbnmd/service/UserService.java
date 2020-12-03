@@ -9,21 +9,21 @@ public interface UserService {
 
 
     /**
-     * 保存新图片
+     * 用户注册
      *
      * @param user
      */
     public void save(User user);
 
     /**
-     * 删除图片
+     * 删除用户
      *
      * @param id
      */
     public void delete(Integer id);
 
     /**
-     * 根据id查图片详情(    图片的metadata )
+     * 根据id查用户信息
      *
      * @param id
      * @return

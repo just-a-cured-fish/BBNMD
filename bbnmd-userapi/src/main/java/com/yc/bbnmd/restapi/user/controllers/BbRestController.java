@@ -1,9 +1,8 @@
-package com.yc.bbnmd.restapi.controllers;
+package com.yc.bbnmd.restapi.user.controllers;
 
 
 import com.google.gson.Gson;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.yc.bbnmd.entity.User;
 import com.yc.bbnmd.service.UserService;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping("/bbnmd")
+@RequestMapping("/bbnmd/user")
 public class BbRestController {
     private static Logger logger = LoggerFactory.getLogger(BbRestController.class);
 
@@ -24,7 +23,7 @@ public class BbRestController {
     private UserService userService;
 
     @RequestMapping(value = "/{id}")
-   // @HystrixCommand(fallbackMethod = "errorCallBack")   //模仿没有这个数据时，服务降级
+    //@HystrixCommand(fallbackMethod = "errorCallBack")   //模仿没有这个数据时，服务降级
     public CompletableFuture<String> findById(@PathVariable Integer id) {
 
         //非阻塞式异步编程方法。因为在web ui的微服务对rest api的调用中将使用这种高并发的编程方法，所以为了保证与调用端保持同步，这里也使用这种方法.
@@ -34,8 +33,10 @@ public class BbRestController {
             Map<String, Object> map = new HashMap<>();
             map.put("code", 1);
             map.put("data", user);
+            System.out.println("map::::"+map);
             return new Gson().toJson(map);
         });
+
     }
 
     //指定一个降级的方法

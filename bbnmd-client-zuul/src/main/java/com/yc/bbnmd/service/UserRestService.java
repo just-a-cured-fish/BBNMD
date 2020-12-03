@@ -1,9 +1,9 @@
-package com.yc.piclib.service;
+package com.yc.bbnmd.service;
 
 import com.google.gson.Gson;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.yc.bbnmd.client.UserClient;
 import com.yc.bbnmd.entity.User;
-import com.yc.piclib.client.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +12,14 @@ import java.util.Map;
 
 //Hystrix服务层:  调用 PiclibClient,实现断路器功能
 @Service
-public class PiclibRestService {
+public class UserRestService {
     @Autowired
-    private UserClient piclibClient;
+    private UserClient userClient;
 
 
     @HystrixCommand(fallbackMethod = "findByIdFallback")
     public String findById(Integer id) {
-        return piclibClient.findById(id);
+        return userClient.findById(id);
     }
 
     private String findByIdFallback(Integer id) {
@@ -41,7 +41,7 @@ public class PiclibRestService {
 
     @HystrixCommand(fallbackMethod = "createFallback")
     public String create(User user) {
-        return piclibClient.create(user);
+        return userClient.create(user);
     }
 
     private String createFallback(User user) {
@@ -53,7 +53,7 @@ public class PiclibRestService {
 
     @HystrixCommand(fallbackMethod = "deleteFallback")
     public String delete(Integer id) {
-        return piclibClient.delete(id);
+        return userClient.delete(id);
     }
 
     private String deleteFallback(Integer id) {

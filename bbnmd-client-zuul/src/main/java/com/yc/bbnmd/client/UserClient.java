@@ -1,7 +1,7 @@
-package com.yc.piclib.client;
+package com.yc.bbnmd.client;
 
+import com.yc.bbnmd.config.FeignClientConfig;
 import com.yc.bbnmd.entity.User;
-import com.yc.piclib.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
