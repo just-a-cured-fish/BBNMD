@@ -1,0 +1,25 @@
+server:
+  port: 8095
+
+##FeignClient超时设置
+spring:
+  cloud:
+    loadbalancer.retry.enabled: true
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: a
+    url: jdbc:mysql://localhost:3306/bbnmd?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+ribbon.ConnectTimeout: 250
+ribbon.ReadTimeout: 1000
+ribbon.OkToRetryOnAllOperations: true
+ribbon.MaxAutoRetriesNextServer: 2
+ribbon.MaxAutoRetries: 1
+
+---
+#spring devtools 更改类程序文件不使用热部署自动重启
+spring.devtools.restart.enabled: false
+spring.devtools.livereload.enabled: false

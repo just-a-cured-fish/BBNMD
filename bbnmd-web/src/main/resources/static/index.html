@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <meta charset="UTF-8">
+    <title>图片展示</title>
+</head>
+<body>
+<div id="app">
+    <h1>图片列表</h1>
+
+    <ul id="example-1">
+        <li v-for="pic in sites">
+            <dt>{{ pic.path }}</dt>
+            <dl>{{pic.id}}</dl>
+            <dl>{{pic.description}}</dl>
+        </li>
+    </ul>
+
+    <!--分页-->
+    <div class="page-bar">
+        <ul>
+            <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+            <li v-if="cur==1"><a class="banclick">上一页</a></li>
+            <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                <a v-on:click="btnClick(index)">{{ index }}</a>
+            </li>
+            <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+            <li v-if="cur == all"><a class="banclick">下一页</a></li>
+            <li><a>共<i>{{all}}</i>页</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js">
+</script>
+
+<script>
+    var vm = new Vue({
+        el: '#app',  //定位到某个标签区域
+        data: {
+            sites: [], //定义一个数组
+            all: 10, //总页数
+            cur: 1,//当前页码
+            totalSize: 0,  //当前条数
+            pageSize: 2  //每页多少条
+        },
+        mounted() {
+            //mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+            this.dataListFn(1);	//默认为第一页
+        },
+        methods: {  //相当于js中定义函数
+            //分页查询方法
+            dataListFn: function (index) {
+                var page = index;
+                var self = this;   //一定要注意这一句，在ajax中的this指的是ajax对象，而不是 vue的对象
+                $.ajax({
+                    type: "POST",
+                    url: "/piclib/findAll",
+                    data: {page: page, pageSize: self.pageSize, description: 'good'},
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.code == 1) {
+                            var len = result.data.data.length;
+                            self.sites = result.data.data;		//获取数据列表
+                            self.all = result.data.totalPages;  //总页数
+                            self.cur = result.data.page;		//当前页面
+                            self.totalSize = result.data.total;	//当前条数
+                        } else {
+                            alert("查询失败," + yc.data.msg);
+                        }
+                    }
+                });
+            },
+            //分页
+            btnClick: function (data) {//页码点击事件
+                if (data != this.cur) {
+                    this.cur = data
+                }
+                //根据点击页数请求数据
+                this.dataListFn(this.cur.toString());
+            },
+            pageClick: function () {
+                //根据点击页数请求数据
+                this.dataListFn(this.cur.toString());
+            },
+        },
+
+        computed: {			//计算属性
+            //分页
+            indexs: function () {
+                var left = 1;
+                var right = this.all;
+                var ar = [];
+                if (this.all >= 5) {
+                    if (this.cur > 3 && this.cur < this.all - 2) {
+                        left = this.cur - 2
+                        right = this.cur + 2
+                    } else {
+                        if (this.cur <= 3) {
+                            left = 1
+                            right = 5
+                        } else {
+                            right = this.all
+                            left = this.all - 4
+                        }
+                    }
+                }
+                while (left <= right) {
+                    ar.push(left)
+                    left++
+                }
+                return ar
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>

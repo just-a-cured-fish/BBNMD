@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: picweb
+  #  profiles:
+  #    active: development
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
