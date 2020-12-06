@@ -1,0 +1,41 @@
+server:
+  port: 7101
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:a@eureka1:7001/eureka/
+  instance:
+    prefer-ip-address: true # 在地址栏上使用IP地址进行显示
+    instance-id: base-microservice-config1
+    lease-expiration-duration-in-seconds: 90  #如果现在超过了5s的时间间隔( default: 90 s )
+    lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
+spring:
+  security:
+    user:
+      name: admin
+      password: a
+  cloud:
+    config:
+      server:
+        git:     #git服务器配置
+          uri: https://github.com/just-a-cured-fish/BBNMD-config
+          default-label: main
+    bus:     # 开启bus消息总线
+      trace:
+        enabled: true
+
+    stream:
+      kafka:
+        binder:
+          brokers: 123.57.89.200  #yxh的kafka
+
+  application:
+    name: base-microservice-config
+
+
+# 监控的功能
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
