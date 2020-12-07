@@ -6,6 +6,7 @@
 </div>
 <br>
 :pencil2: git相关
+<br>
 1. 提交规范
   ①每次提交必须写清楚相关message 
   ②message字典：
