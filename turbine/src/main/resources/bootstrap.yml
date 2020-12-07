@@ -1,0 +1,34 @@
+#联接配置中心
+spring:
+  application:
+    name: turbine
+
+  cloud:
+    config:
+      name: turbine           # 定义要读取的github配置文件的名称
+      profile: beta # 定义profile的 名称
+      label: main # 定义配置文件所在的分支
+      #uri: http://localhost:7101 # SpringCloudConfig的服务地址
+      username: admin # 登录config服务器的用户名
+      password: a # 登录config服务器的密码
+      discovery:   # 到eureka中查找config服务   ,得到服务实例列表
+        enabled: true
+        service-id: BASE-MICROSERVICE-CONFIG    # 服务实例名
+
+    stream:
+      kafka:
+        binder:
+          brokers: 123.57.89.200
+
+##  访问 config的注册中心eureka服务器，获取config实例列表
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://admin:a@123.57.89.200:7001/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,23 @@
+server:
+  port: 7001
+spring:
+  security:
+    user:
+      name: admin
+      password: a
+eureka:
+  instance:
+    hostname: eureka1 #eureka服务端的实例名
+    prefer-ip-address: true
+  client:
+    fetch-registry: false #是否要从注册中心获取注册信息 , 解决eureka启动时报错
+    register-with-eureka: false #表示不向注册中心注册自己
+    service-url:
+      defaultZone: http://admin:a@eureka1:7001/eureka
+  server:
+    eviction-interval-timer-in-ms: 1000   #设置清理的间隔时间，ms (默认是60秒）
+    enable-self-preservation: false       #设置为false表示关闭保护模式,在保护模式下，如因为网络或其它问题服务提供者掉线的话，eureka不会立即清空服务列表.
+
+
+application:
+  name: microservice-ha-config-eureka
